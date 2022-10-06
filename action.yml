@@ -1,0 +1,30 @@
+# Copyright (c) 2022 OpenFaaS Ltd
+name: 'block-with-tmux'
+description: 'block-with-tmux'
+branding:
+  icon: 'arrow-right-circle'
+  color: 'gray-dark'
+runs:
+    using: 'composite'
+    steps:
+      - name: Install tmux
+        shell: bash
+        id: install-tmux
+        run: |
+           sudo apt update && sudo apt install -qy openssh-server tmux
+      - name: Block until tmux session is closed
+        shell: bash
+        id: waituntilclosed
+        run: |
+          cat << EOF | sudo tee /etc/motd
+          ╺┳┓┏━╸┏┓ ╻ ╻┏━╸   ┏━┓┏━╸┏━┓┏━┓╻┏━┓┏┓╻
+           ┃┃┣╸ ┣┻┓┃ ┃┃╺┓   ┗━┓┣╸ ┗━┓┗━┓┃┃ ┃┃┗┫
+          ╺┻┛┗━╸┗━┛┗━┛┗━┛   ┗━┛┗━╸┗━┛┗━┛╹┗━┛╹ ╹
+          To attach to the debug session, run "tmux attach".
+          Finally, when you're done, exit the session or type in
+          "exit" to let the runner exit.
+          EOF
+          tmux new-session -d -s debug
+          
+          # Blocks until someone has attached to the session and closed it
+          tmux wait-for channel
