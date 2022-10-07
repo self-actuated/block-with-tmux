@@ -20,10 +20,17 @@ runs:
           ╺┳┓┏━╸┏┓ ╻ ╻┏━╸   ┏━┓┏━╸┏━┓┏━┓╻┏━┓┏┓╻
            ┃┃┣╸ ┣┻┓┃ ┃┃╺┓   ┗━┓┣╸ ┗━┓┗━┓┃┃ ┃┃┗┫
           ╺┻┛┗━╸┗━┛┗━┛┗━┛   ┗━┛┗━╸┗━┛┗━┛╹┗━┛╹ ╹
-          To attach to the debug session, run "tmux attach".
-          Finally, when you're done, exit the session or type in
-          "exit" to let the runner exit.
+          
+          You're in a debug session, which is blocked until 
+          a tmux session we started for you gets closed.
+          
+          You can attach to the session with "tmux attach"
+          
+          To resume the action, type "exit" into "tmux" or
+          "tmux kill-session"
+
           EOF
+
           tmux new-session -d -s debug
           
           # Blocks until someone has attached to the session and closed it
