@@ -26,16 +26,11 @@ runs:
            ┃┃┣╸ ┣┻┓┃ ┃┃╺┓   ┗━┓┣╸ ┗━┓┗━┓┃┃ ┃┃┗┫
           ╺┻┛┗━╸┗━┛┗━┛┗━┛   ┗━┛┗━╸┗━┛┗━┛╹┗━┛╹ ╹
           
-          You're in a debug session, which is blocked until 
-          a tmux session we started for you gets closed.
+          A tmux session is running in the background, you can attach with 
+          "tmux attach".
           
-          You can attach to the session with "tmux attach"
+          To stop this host, run "unblock" or "tmux kill-session".
           
-          To resume the action, type "exit" into "tmux" or
-          "tmux kill-session"
-
-          Or run "unblock", which is an alias of the above.
-
           EOF
 
           tmux new-session -d -s debug
