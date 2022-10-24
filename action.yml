@@ -14,8 +14,13 @@ runs:
            sudo apt update && sudo apt install -qy openssh-server tmux
       - name: Block until tmux session is closed
         shell: bash
-        id: waituntilclosed
+        id: tmux-wait-until-closed
         run: |
+          echo "#!/bin/bash" >> /usr/local/bin/unblock
+          echo "tmux kill-session" >> /usr/local/bin/unblock
+          
+          chmod +x /usr/local/bin/unblock
+          
           cat << EOF | sudo tee /etc/motd
           ╺┳┓┏━╸┏┓ ╻ ╻┏━╸   ┏━┓┏━╸┏━┓┏━┓╻┏━┓┏┓╻
            ┃┃┣╸ ┣┻┓┃ ┃┃╺┓   ┗━┓┣╸ ┗━┓┗━┓┃┃ ┃┃┗┫
@@ -28,6 +33,8 @@ runs:
           
           To resume the action, type "exit" into "tmux" or
           "tmux kill-session"
+
+          Or run "unblock", which is an alias of the above.
 
           EOF
 
