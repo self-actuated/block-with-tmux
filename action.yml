@@ -16,10 +16,10 @@ runs:
         shell: bash
         id: tmux-wait-until-closed
         run: |
-          echo "#!/bin/bash" >> /usr/local/bin/unblock
-          echo "tmux kill-session" >> /usr/local/bin/unblock
+          echo "#!/bin/bash" | sudo tee -a /usr/local/bin/unblock
+          echo "tmux kill-session" | sudo tee -a /usr/local/bin/unblock
           
-          chmod +x /usr/local/bin/unblock
+          sudo chmod +x /usr/local/bin/unblock
           
           cat << EOF | sudo tee /etc/motd
           ╺┳┓┏━╸┏┓ ╻ ╻┏━╸   ┏━┓┏━╸┏━┓┏━┓╻┏━┓┏┓╻
