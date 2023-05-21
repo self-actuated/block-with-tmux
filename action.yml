@@ -11,7 +11,8 @@ runs:
         shell: bash
         id: install-tmux
         run: |
-           sudo apt update && sudo apt install -qy openssh-server tmux
+           echo Installing tmux
+           sudo apt update -qqqy && sudo apt install -qqqy tmux
       - name: Block until tmux session is closed
         shell: bash
         id: tmux-wait-until-closed
